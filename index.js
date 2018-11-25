@@ -13,59 +13,37 @@ app.use(express.urlencoded({ extended: false }))
 app.set('view engine', 'njk')
 
 const logMiddleware = (req, res, next) => {
-  console.log(
-    `HOST: ${req.headers.host} || URL: ${req.url} | METHOD: ${req.method} `
-  )
+  const { age } = req.query
 
-  req.name = 'GoNode'
+  if (!age) {
+    return res.redirect('/')
+  }
 
   return next() // não bloqueia o fluxo de func. do Node
 }
 
-app.use(logMiddleware) // todos os verbos irao ter acesso.
-
-// app.get('/', (req , res) => {
-//     return res.send('Hello Word')
-// })
-
-const users = ['Andre Nunes', 'Francisca Nunes']
-
-// nunjucks
 app.get('/', (req, res) => {
-  return res.render('list', { users })
+  return res.render('age')
 })
 
-app.get('/new', (req, res) => {
-  return res.render('new')
+app.get('/major', logMiddleware, (req, res) => {
+  const { age } = req.query
+  return res.render('major', { age })
 })
 
-app.post('/create', (req, res) => {
-  console.log(req.body)
-  users.push(req.body.user)
-
-  return res.redirect('/')
+app.get('/minor', logMiddleware, (req, res) => {
+  const { age } = req.query
+  return res.render('minor', { age })
 })
 
-// app.get('/Login', (req , res) => {
-//     return res.send('Login')
-// })
-
-// app.get('/nome/:name', (req , res) => {
-//     return res.send(`Bem Vindo, ${req.params.name} `)
-// })
-
-/* Query Params */
-// app.get('/', (req , res) => {
-//     return res.send(`Bem Vindo, ${req.query.name} `)
-// })
-
-/* Json */
-// app.get('/nome/:name', logMiddleware, (req , res) => {
-//     return res.json({
-//         message: `Welcome to ${req.name} **, ${req.params.name} `
-//     })
-// })
-
-/* Fluxo de Requisição */
+app.post('/check', (req, res) => {
+  console.log(req.body.age)
+  const { age } = req.body
+  if ({ age } < 18) {
+    return res.redirect(`/minor?age=${age}`)
+  } else {
+    return res.redirect(`/major?age=${age}`)
+  }
+})
 
 app.listen(3000)
