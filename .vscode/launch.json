@@ -1,14 +1,35 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Passe o mouse para ver as descrições dos atributos existentes.
-    // Para obter mais informações, visite: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Executar Programa",
-            "program": "${workspaceFolder}\\index.js"
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Passe o mouse para ver as descrições dos atributos existentes.
+  // Para obter mais informações, visite: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Executar Programa",
+      "program": "${workspaceFolder}\\index.js"
+    }
+  ],
+
+  // Define o tema do VSCode
+  "workbench.colorTheme": "Dracula",
+
+  // Configura tamanho e família da fonte
+  "editor.fontSize": 16,
+  "editor.lineHeight": 24,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+
+  // Aplica linhas verticais para lembrar de quebrar linha em códigos muito grandes
+  "editor.rulers": [80, 120],
+
+  // Aplica um sinal visual na esquerda da linha selecionada
+  "editor.renderLineHighlight": "gutter",
+
+  // Aumenta a fonte do terminal
+  "terminal.integrated.fontSize": 14,
+
+  // Define o tema dos ícones na sidebar
+  "workbench.iconTheme": "material-icon-theme"
 }
